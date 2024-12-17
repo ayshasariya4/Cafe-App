@@ -1,27 +1,9 @@
 import 'package:flutter/material.dart';
 
-class WishlistPage extends StatefulWidget {
-  @override
-  _WishlistPageState createState() => _WishlistPageState();
-}
+class WishlistPage extends StatelessWidget {
+  final List<Map<String, String>> wishlistItems;
 
-class _WishlistPageState extends State<WishlistPage> {
-  // Wishlist items: initially empty
-  final List<Map<String, String>> wishlistItems = [];
-
-  // Function to remove an item from the wishlist
-  void _removeFromWishlist(int index) {
-    setState(() {
-      wishlistItems.removeAt(index);
-    });
-
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text('Item removed from wishlist!'),
-        duration: Duration(seconds: 2),
-      ),
-    );
-  }
+  WishlistPage({required this.wishlistItems});
 
   @override
   Widget build(BuildContext context) {
@@ -58,29 +40,13 @@ class _WishlistPageState extends State<WishlistPage> {
                         color: Colors.brown[900],
                       ),
                     ),
-                    subtitle: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          item['description']!,
-                          style: TextStyle(color: Colors.brown[700]),
-                        ),
-                        SizedBox(height: 5),
-                        Text(
-                          item['price']!,
-                          style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                            color: Colors.brown[900],
-                          ),
-                        ),
-                      ],
-                    ),
-                    trailing: IconButton(
-                      icon: Icon(Icons.delete, color: Colors.redAccent),
-                      onPressed: () {
-                        _removeFromWishlist(index);
-                      },
+                    subtitle: Text(item['description']!),
+                    trailing: Text(
+                      item['price']!,
+                      style: TextStyle(
+                        fontWeight: FontWeight.bold,
+                        color: Colors.brown[900],
+                      ),
                     ),
                   ),
                 );
